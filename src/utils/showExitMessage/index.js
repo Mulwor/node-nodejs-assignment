@@ -1,5 +1,5 @@
 import { exitMessage } from './exitMessage.js';
-import { stdin, argv } from 'node:process';
+import { stdin } from 'node:process';
 import { commands } from '../commands/index.js';
 import { showCurrentPath } from '../showCurrentPath/index.js';
 
@@ -11,7 +11,7 @@ export const showExitMessage = (username) => {
     if (result.includes('.exit')) exitMessage(username);
 
     const [command, ...args] = result.split(' ');
-    const action = commands[command];   
+    const action = commands[command];
     !action ? console.log('Invalid input') : await action(...args);
  
     showCurrentPath();

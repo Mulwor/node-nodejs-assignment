@@ -1,10 +1,9 @@
 import { readdir, stat } from 'node:fs/promises';
-import { cwd } from 'node:process';
 import path from 'node:path';
 
 export const tableOfListFiles = async () => {
   try {
-    const getCurrentDirectory = cwd();
+    const getCurrentDirectory = process.cwd();
     const readDirectory = await readdir(getCurrentDirectory);
 
     const result = [];
