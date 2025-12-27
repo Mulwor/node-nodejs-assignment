@@ -8,4 +8,5 @@ export { setAbsolutePath } from './setAbsolutePath/index.js';
 export { commands } from './commands/index.js'
 
 // Check
-export { checkIsDirectory } from './checkIsDirectory/checkIsDirectory.js'
+export { isDirectory } from './checks/isDirectory.js';
+export { isFile } from './checks/isFile.js';

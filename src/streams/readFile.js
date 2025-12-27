@@ -1,6 +1,6 @@
 import fs from 'fs/promises'; 
 import path from 'path';
-import { checkIsDirectory } from '../utils/index.js';
+import { isDirectory } from '../utils/index.js';
 
 export const readFile = async (pathToFile) => { 
   if (!pathToFile) {
@@ -9,7 +9,7 @@ export const readFile = async (pathToFile) => {
   }
 
   const newPath = path.resolve(pathToFile);
-  checkIsDirectory(newPath)
+  isDirectory(newPath)
 
   try {
     const fileToRead = fs.createReadStream(newPath);
