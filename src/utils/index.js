@@ -6,3 +6,6 @@ export { setAbsolutePath } from './setAbsolutePath/index.js';
 
 // Objects
 export { commands } from './commands/index.js'
+
+// Check
+export { checkIsDirectory } from './checkIsDirectory/checkIsDirectory.js'

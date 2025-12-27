@@ -1,7 +1,10 @@
 import path, { join, normalize } from 'path';
 
 export const changeDirectory = async (pathToFile) => {
-  if (!pathToFile) console.log('Invalid input');
+  if (!pathToFile) {
+    console.log('Invalid input');
+    return;
+  }
 
   try {
     const currentDirectory = process.cwd(); 

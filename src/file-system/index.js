@@ -1,7 +1,5 @@
-import { upTheDirectory } from './navigation/upTheDirectory.js';
-import { changeDirectory } from './navigation/changeDirectory.js';
+import { createFile } from './createFile.js';
 
 export {
-    upTheDirectory,
-    changeDirectory
+  createFile
 }
