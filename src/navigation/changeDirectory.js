@@ -1,4 +1,4 @@
-import path, { join, normalize } from 'path';
+import { join, normalize } from 'path';
 
 export const changeDirectory = async (pathToFile) => {
   if (!pathToFile) {
@@ -9,8 +9,6 @@ export const changeDirectory = async (pathToFile) => {
   try {
     const currentDirectory = process.cwd(); 
     const parentDirectory = join(currentDirectory, pathToFile)
-    
-    // If someone write .///asd/sadness => ./asd
     const normalizeDirectory = normalize(parentDirectory)
 
     process.chdir(normalizeDirectory);

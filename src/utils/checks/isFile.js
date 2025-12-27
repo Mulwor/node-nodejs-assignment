@@ -1,11 +1,10 @@
 import fs from 'fs/promises'; 
 
-export const isFile = async (filePath) => {
+export const isFile = async (path) => {
   try {
-    const stats = await fs.stat(filePath);
-    return stats.isFile();
-  } catch (error) {
-    console.log('Invalid input: file not found');
+    const stat = await fs.stat(path);
+    return stat.isFile();
+  } catch {
     return false;
   }
 }

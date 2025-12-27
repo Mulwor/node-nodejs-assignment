@@ -1,5 +1,5 @@
 import { readdir, stat } from 'node:fs/promises';
-import path from 'node:path';
+import { join } from 'path';
 
 export const tableOfListFiles = async () => {
   try {
@@ -9,7 +9,7 @@ export const tableOfListFiles = async () => {
     const result = [];
 
     for (let i = 0; i < readDirectory.length; i++) {
-      const pathToFile = path.join(getCurrentDirectory, readDirectory[i]);
+      const pathToFile = join(getCurrentDirectory, readDirectory[i]);
       const informationAboutFile = await stat(pathToFile);
 
       result.push({

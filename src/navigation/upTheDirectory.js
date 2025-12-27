@@ -1,14 +1,12 @@
 import { join } from 'path';
 
-//  - `cd path_to_directory` - Он может быть как абсолютным, так и относительным.
-//  Переходит в определенную папку
 export const upTheDirectory = () => {
   try {
     const currentDirectory = process.cwd(); 
     const parentDirectory = join(currentDirectory, '..');
 
     if (currentDirectory === parentDirectory) {
-      console.log('Invalid input (cannot go up: already at root directory)');
+      console.log('Invalid input: cannot go up: already at root directory');
       return currentDirectory;
     }
         

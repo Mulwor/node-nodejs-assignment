@@ -1,6 +1,6 @@
 import { createReadStream, createWriteStream } from 'fs';
-import fs from 'fs/promises'; 
 import path from 'path';
+import { isFile, isDirectory } from '../utils/index.js';
 
 export const copyFile = async (pathToFile, pathToNewDirectory) => {
   if (!pathToFile || !pathToNewDirectory) {
@@ -12,16 +12,15 @@ export const copyFile = async (pathToFile, pathToNewDirectory) => {
   const newFilePath = path.join(pathToNewDirectory, fileName);
 
   try {
-    const stats = await fs.stat(pathToFile);
-    
-    if (stats.isDirectory()) {
-      console.log("Operation failed: Source is a directory");
-      return;
+    const directoryExists = await isDirectory(pathToFile);
+    if (directoryExists) {
+        console.log('Operation failed: it is a directory');
+        return;
     }
-    
-    if (stats.isFile()) {
-      console.log("Operation failed: File was already created");
-      return;
+    const fileExists = await isFile(pathToFile);
+    if (fileExists) {
+        console.log('Operation failed: the file has already been created');
+        return;
     }
 
     await new Promise((resolve, reject) => {

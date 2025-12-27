@@ -1,9 +1,7 @@
 import { tableOfListFiles } from "../../file-system/tableOfListFiles.js";
-import { createFile, renameFile } from "../../file-system/index.js";
+import { createFile, renameFile, createDirectory } from "../../file-system/index.js";
 import { copyFile, readFile } from "../../streams/index.js";
-import { changeDirectory } from "../../navigation/changeDirectory.js";
-import { upTheDirectory } from "../../navigation/upTheDirectory.js";
-import { createDirectory } from "../../file-system/createDirectory.js";
+import { changeDirectory, upTheDirectory } from "../../navigation/index.js";
 
 export const commands = {
   up: async () => upTheDirectory(),

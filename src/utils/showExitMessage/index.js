@@ -1,7 +1,7 @@
 import { exitMessage } from './exitMessage.js';
 import { stdin } from 'node:process';
-import { commands } from '../commands/index.js';
-import { showCurrentPath } from '../showCurrentPath/index.js';
+import { commands } from '../commands/commands.js';
+import { showCurrentPath } from '../showCurrentPath/showCurrentPath.js';
 
 export const showExitMessage = (username) => {
   process.on('SIGINT', () => exitMessage(username))

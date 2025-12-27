@@ -1,7 +1,6 @@
 import { rename } from 'fs/promises'; 
 import { isFile } from '../utils/index.js';
-
-import path from 'path';
+import { dirname, join } from 'path';
 
 export const renameFile = async (pathToFile, newFilename) => {
   if (!pathToFile || !newFilename) {
@@ -9,15 +8,16 @@ export const renameFile = async (pathToFile, newFilename) => {
     return;
   }
 
-  const baseDirname = path.dirname(pathToFile);
-  const newPath = path.join(baseDirname, newFilename);
-
+  const baseDirname = dirname(pathToFile);
+  const newPath = join(baseDirname, newFilename);
+  
   try {
-    const file = await isFile(pathToFile);
-    if (!file) {
-      console.log('Invalid input: not a file or file not found');
+    const fileExists = await isFile(pathToFile);
+    if (!fileExists) {
+      console.log('Operation failed: it is not a file or file not found');
       return;
     }
+
     await rename(pathToFile, newPath)
   } catch {
     console.log("Operation failed")

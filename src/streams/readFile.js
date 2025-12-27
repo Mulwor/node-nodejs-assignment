@@ -1,4 +1,4 @@
-import fs from 'fs/promises'; 
+import fs from 'fs'; 
 import path from 'path';
 import { isDirectory } from '../utils/index.js';
 
@@ -9,10 +9,15 @@ export const readFile = async (pathToFile) => {
   }
 
   const newPath = path.resolve(pathToFile);
-  isDirectory(newPath)
 
   try {
-    const fileToRead = fs.createReadStream(newPath);
+    const directoryExists = await isDirectory(newPath);
+    if (directoryExists) {
+      console.log('Operation failed: it is a directory');
+      return;
+    }
+
+    const fileToRead = fs.createReadStream(pathToFile);
     const processStdout = process.stdout;
     fileToRead.pipe(processStdout);
     fileToRead.on('end', () => processStdout.write('\n'));
