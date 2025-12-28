@@ -1,6 +1,5 @@
-import path from 'path';
-import fs from 'fs';
-import crypto from 'crypto'
+import { resolve } from 'path';
+import { createReadStream } from 'fs';
 import { isFile } from '../utils/index.js';
 
 export const calculateHashFile = async (pathToFile) => {
@@ -9,7 +8,7 @@ export const calculateHashFile = async (pathToFile) => {
     return;
   }
 
-  const fileName = path.resolve(pathToFile);
+  const fileName =resolve(pathToFile);
   
   try {
     const fileExists = await isFile(pathToFile);
@@ -18,7 +17,7 @@ export const calculateHashFile = async (pathToFile) => {
       return;
     }
 
-    const readStreamApi = fs.createReadStream(fileName)
+    const readStreamApi = createReadStream(fileName)
     const calculateHash = async () => {
       readStreamApi.on('data', (chunk) => hash.update(chunk))
       readStreamApi.on('end', () => console.log(hash.digest('hex')))

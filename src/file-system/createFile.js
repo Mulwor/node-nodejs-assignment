@@ -1,4 +1,4 @@
-import path from 'path';
+import { join } from 'path';
 import { writeFile } from 'fs/promises'
 
 export const createFile = async (newFileName) => {
@@ -7,7 +7,7 @@ export const createFile = async (newFileName) => {
     return;
   }
 
-  const newPath = path.join(newFileName);
+  const newPath = join(newFileName);
 
   try {
     await writeFile(newPath, '', { flag: 'wx' });

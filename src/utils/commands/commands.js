@@ -1,11 +1,8 @@
-import { tableOfListFiles } from "../../file-system/tableOfListFiles.js";
-import { createFile, renameFile, createDirectory } from "../../file-system/index.js";
+import { createFile, renameFile, createDirectory, removeFile, tableOfListFiles } from "../../file-system/index.js";
 import { copyFile, readFile, moveFile } from "../../streams/index.js";
 import { changeDirectory, upTheDirectory } from "../../navigation/index.js";
-import { removeFile } from "../../file-system/removeFile.js";
-import { calculateHashFile } from "../../hash/hash.js";
-import { compressFile } from "../../zip/compress.js";
-import { decompressFile } from "../../zip/decompress.js";
+import { calculateHashFile } from "../../hash/calculateHashFile.js";
+import { compressFile, decompressFile } from "../../zip/index.js";
 
 export const commands = {
   up: async () => upTheDirectory(),

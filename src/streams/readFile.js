@@ -1,5 +1,5 @@
-import fs from 'fs'; 
-import path from 'path';
+import { resolve } from 'path';
+import { createReadStream } from 'fs';
 import { isDirectory } from '../utils/index.js';
 
 export const readFile = async (pathToFile) => { 
@@ -8,7 +8,7 @@ export const readFile = async (pathToFile) => {
     return;
   }
 
-  const newPath = path.resolve(pathToFile);
+  const newPath = resolve(pathToFile);
 
   try {
     const directoryExists = await isDirectory(newPath);
@@ -17,7 +17,7 @@ export const readFile = async (pathToFile) => {
       return;
     }
 
-    const fileToRead = fs.createReadStream(pathToFile);
+    const fileToRead = createReadStream(pathToFile);
     const processStdout = process.stdout;
     fileToRead.pipe(processStdout);
     fileToRead.on('end', () => processStdout.write('\n'));

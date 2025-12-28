@@ -1,4 +1,4 @@
-import path from 'path';
+import { resolve, basename, join } from 'path';
 import { createReadStream, createWriteStream } from 'fs';
 import { createBrotliCompress } from 'zlib';
 import { pipeline } from 'stream/promises';
@@ -10,10 +10,10 @@ export const compressFile = async (pathToFile, pathToDestination) => {
     return;
   }
 
-  const newPathToFile = path.resolve(pathToFile);
-  const newPathToDestination = path.resolve(pathToDestination)
-  const fileName = path.basename(newPathToFile);
-  const newFilePath = path.join(newPathToDestination, `${fileName}.br`);
+  const newPathToFile = resolve(pathToFile);
+  const newPathToDestination = resolve(pathToDestination)
+  const fileName = basename(newPathToFile);
+  const newFilePath = join(newPathToDestination, `${fileName}.br`);
 
   const brotliCompress = createBrotliCompress()
 

@@ -1,5 +1,5 @@
 import { createReadStream, createWriteStream } from 'fs';
-import path from 'path';
+import { basename, join } from 'path';
 import { isFile, isDirectory } from '../utils/index.js';
 
 export const copyFile = async (pathToFile, pathToNewDirectory) => {
@@ -8,8 +8,8 @@ export const copyFile = async (pathToFile, pathToNewDirectory) => {
     return;
   }
 
-  const fileName = path.basename(pathToFile);
-  const newFilePath = path.join(pathToNewDirectory, fileName);
+  const fileName = basename(pathToFile);
+  const newFilePath = join(pathToNewDirectory, fileName);
 
   try {
     const directoryExists = await isDirectory(pathToFile);

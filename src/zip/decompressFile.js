@@ -1,4 +1,4 @@
-import path from 'path';
+import { resolve, basename, join, parse } from 'path';
 import { createReadStream, createWriteStream } from 'fs';
 import { createBrotliDecompress } from 'zlib';
 import { pipeline } from 'stream/promises';
@@ -10,13 +10,13 @@ export const decompressFile = async (pathToFile, pathToDestination) => {
     return;
   }
 
-  const newPathToFile = path.resolve(pathToFile);
-  const newPathToDestination = path.resolve(pathToDestination)
+  const newPathToFile = resolve(pathToFile);
+  const newPathToDestination = resolve(pathToDestination)
   
-  const takeNameFromPathParse = path.parse(newPathToFile).name
-  const takeExtFromPathParse = path.parse(newPathToFile).ext
-  const name = takeExtFromPathParse === '.br' ? takeNameFromPathParse : path.basename(newPathToFile);
-  const newFilePath = path.join(newPathToDestination, name);
+  const takeNameFromPathParse = parse(newPathToFile).name
+  const takeExtFromPathParse = parse(newPathToFile).ext
+  const name = takeExtFromPathParse === '.br' ? takeNameFromPathParse : basename(newPathToFile);
+  const newFilePath = join(newPathToDestination, name);
 
   const brotliCompress = createBrotliDecompress()
 
@@ -36,5 +36,3 @@ export const decompressFile = async (pathToFile, pathToDestination) => {
     console.log("Operation failed", error)
   }
 }
-
-// ? 'распаковать файл (используя алгоритм Brotli, следует выполнять с помощью Streams API)'

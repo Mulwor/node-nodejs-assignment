@@ -1,5 +1,4 @@
-import fs from 'fs';
-import path from 'path';
+import { resolve } from 'path';
 import { unlink } from 'fs/promises';
 import { isDirectory } from '../utils/index.js';
 
@@ -9,7 +8,7 @@ export const removeFile = async (pathToFile) => {
     return;
   }
 
-  const pathToFileRemove = path.resolve(pathToFile);
+  const pathToFileRemove = resolve(pathToFile);
 
   try {
     const directoryExists = await isDirectory(pathToFileRemove);
