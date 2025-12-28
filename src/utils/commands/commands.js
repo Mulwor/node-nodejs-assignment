@@ -3,6 +3,9 @@ import { createFile, renameFile, createDirectory } from "../../file-system/index
 import { copyFile, readFile, moveFile } from "../../streams/index.js";
 import { changeDirectory, upTheDirectory } from "../../navigation/index.js";
 import { removeFile } from "../../file-system/removeFile.js";
+import { calculateHashFile } from "../../hash/hash.js";
+import { compressFile } from "../../zip/compress.js";
+import { decompressFile } from "../../zip/decompress.js";
 
 export const commands = {
   up: async () => upTheDirectory(),
@@ -16,7 +19,7 @@ export const commands = {
   mv: async (pathToFile, pathToNewDirectory) => await moveFile(pathToFile, pathToNewDirectory),
   rm: async (pathToFile) => await removeFile(pathToFile),
   os: (methods) => console.log('Нужно найти способ объединить все os (--EOL, --cpus) в одну общую'),
-  hash: async (pathToFile) => console.log('Вычисляет хэш для файла и выводит его в консоль'),
-  compress: async (pathToFile, pathToDestination) => console.log('сжатие файла (с использованием алгоритма Brotli, должно выполняться с использованием Streams API)'),
-  decompress: async (pathToFile, pathToDestination) => console.log('распаковать файл (используя алгоритм Brotli, следует выполнять с помощью Streams API)')
+  hash: async (pathToFile) => await calculateHashFile(pathToFile),
+  compress: async (pathToFile, pathToDestination) => await compressFile(pathToFile, pathToDestination),
+  decompress: async (pathToFile, pathToDestination) => await decompressFile(pathToFile, pathToDestination)
 }
