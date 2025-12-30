@@ -8,7 +8,7 @@ export const calculateHashFile = async (pathToFile) => {
     return;
   }
 
-  const fileName =resolve(pathToFile);
+  const fileName = resolve(pathToFile);
   
   try {
     const fileExists = await isFile(pathToFile);

@@ -3,6 +3,7 @@ import { copyFile, readFile, moveFile } from "../../streams/index.js";
 import { changeDirectory, upTheDirectory } from "../../navigation/index.js";
 import { calculateHashFile } from "../../hash/calculateHashFile.js";
 import { compressFile, decompressFile } from "../../zip/index.js";
+import { operationSystem } from "../../os/index.js";
 
 export const commands = {
   up: async () => upTheDirectory(),
@@ -15,7 +16,7 @@ export const commands = {
   cp: async (pathToFile, pathToNewDirectory) => await copyFile(pathToFile, pathToNewDirectory),
   mv: async (pathToFile, pathToNewDirectory) => await moveFile(pathToFile, pathToNewDirectory),
   rm: async (pathToFile) => await removeFile(pathToFile),
-  os: (methods) => console.log('Нужно найти способ объединить все os (--EOL, --cpus) в одну общую'),
+  os: async (methods) => await operationSystem(methods),
   hash: async (pathToFile) => await calculateHashFile(pathToFile),
   compress: async (pathToFile, pathToDestination) => await compressFile(pathToFile, pathToDestination),
   decompress: async (pathToFile, pathToDestination) => await decompressFile(pathToFile, pathToDestination)
