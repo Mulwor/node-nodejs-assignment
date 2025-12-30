@@ -4,14 +4,20 @@ import { getHomeDirectory } from './getHomeDirectory.js';
 import { getArchitecture } from './getArchitecture.js';
 import { getCpus } from './getCpus.js';
 
-export const operationSystem = (methods) => {
-  const availableMethodsOperationSystem = {
-    ['--EOL']: getEndOfLine,
-    ['--homedir']: getHomeDirectory,
-    ['--username']: getUserName,
-    ['--architecture']: getArchitecture,
-    ['--cpus']: getCpus,
-  }
+const availableMethodsOperationSystem = {
+  ['--EOL']: getEndOfLine,
+  ['--homedir']: getHomeDirectory,
+  ['--username']: getUserName,
+  ['--architecture']: getArchitecture,
+  ['--cpus']: getCpus,
+}
 
-  return availableMethodsOperationSystem[methods]();
+export const operationSystem = (method) => {
+  const handler = availableMethodsOperationSystem[method];
+  
+  if (!handler) {
+    throw new Error(`Operation failed - unknown method: ${method}`);
+  }
+  
+  return handler();
 }
